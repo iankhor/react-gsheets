@@ -63,8 +63,9 @@ class App extends Component {
   }
 
   _renderConnectButton = () => {
+        {/* <RaisedButton label="Connect with Google" primary={true} onClick={ this._authenticate }/> */}
     return(
-        <RaisedButton label="Connect with Google" primary={true} onClick={ this._authenticate }/>
+        <RaisedButton label="Sign IN" primary={true} onClick={ handleAuthClick }/>
     )
   }
 
@@ -72,6 +73,7 @@ class App extends Component {
     return(
         <div>
           <p>You have been authenticated with Google</p>
+          <p><RaisedButton label="Sign OUT" primary={true} onClick={ handleSignoutClick }/></p>
           <p><RaisedButton label="Load sheet functions then get  data from sheet. ( See Console Log or JSON Debugger )" primary={true} onClick={ this._loadData }/></p>
           <p><RaisedButton label="Update single cell" secondary={true} onClick={ this._updateSingleCell }/></p>
           <p><RaisedButton label="Print data to sheet" primary={true} onClick={ this._dummyAlert }/></p>

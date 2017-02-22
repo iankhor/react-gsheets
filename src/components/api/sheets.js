@@ -8,9 +8,6 @@ const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v
 // included, separated by spaces.
 const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly"
 
-// const authorizeButton = document.getElementById('authorize-button')
-// const signoutButton = document.getElementById('signout-button')
-
 const sheetsAPI = window.gapi
 
 /**
@@ -35,10 +32,10 @@ export function initClient() {
 
     // Handle the initial sign-in state.
     updateSigninStatus(sheetsAPI.auth2.getAuthInstance().isSignedIn.get());
-    // authorizeButton.onclick = handleAuthClick;
-    // signoutButton.onclick = handleSignoutClick;
   });
 }
+
+
 
 /**
  *  Called when the signed in status changes, to update the UI
@@ -46,14 +43,10 @@ export function initClient() {
  */
 export function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
-    // authorizeButton.style.display = 'none';
-    // signoutButton.style.display = 'block';
-
     // place holder for action
-
+    console.log('user is signed in')
   } else {
-    // authorizeButton.style.display = 'block';
-    // signoutButton.style.display = 'none';
+    console.log('user is signed out')
   }
 }
 
