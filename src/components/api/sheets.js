@@ -40,10 +40,6 @@ export function initClient() {
   });
 }
 
-export function isSignedIn() {
-  return sheetsAPI.auth2.getAuthInstance().isSignedIn.get()
-}
-
 /**
  *  Called when the signed in status changes, to update the UI
  *  appropriately. After a sign-in, the API is called.

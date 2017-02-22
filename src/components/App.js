@@ -42,7 +42,6 @@ class App extends Component {
     //   () => checkAuth(true, this._handleAuth) )
 
     handleClientLoad()
-    // console.log('signed in', isSignedIn())
   }
 
   _authenticate(e) {
