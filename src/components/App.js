@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { handleClientLoad,
          handleAuthClick,
          handleSignoutClick,
-         isSignedIn } from './api/sheets'
+         isAuthenticated } from './api/sheets'
 
 //material-ui components
 import { RaisedButton } from 'material-ui/';
@@ -41,7 +41,7 @@ class App extends Component {
     //   'client:auth2', 
     //   () => checkAuth(true, this._handleAuth) )
 
-    handleClientLoad()
+    handleClientLoad( () => { console.log('loaded !!!') } )
   }
 
   _authenticate(e) {
@@ -65,9 +65,15 @@ class App extends Component {
   _renderConnectButton = () => {
         {/* <RaisedButton label="Connect with Google" primary={true} onClick={ this._authenticate }/> */}
     return(
-        <RaisedButton label="Sign IN" primary={true} onClick={ handleAuthClick }/>
+        <div>
+            <p><RaisedButton label="Sign IN" primary={true} onClick={ handleAuthClick }/></p>
+            <p><RaisedButton label="Sign OUT" primary={true} onClick={ handleSignoutClick }/></p>
+            <p><RaisedButton label="is Signed in ?" primary={true} onClick={ isAuthenticated }/></p>
+        </div>
     )
   }
+
+
 
   _renderAuthenticatedButtons = () => {
     return(

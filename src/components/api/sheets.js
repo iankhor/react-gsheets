@@ -10,10 +10,12 @@ const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly"
 
 const sheetsAPI = window.gapi
 
+let isAuth = null
+
 /**
  *  On load, called to load the auth2 library and API client library.
  */
-export function handleClientLoad() {
+export function handleClientLoad(callback) {
   sheetsAPI.load('client:auth2', initClient);
 }
 
@@ -45,10 +47,18 @@ export function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
     // place holder for action
     console.log('user is signed in')
+    isAuth = true
   } else {
     console.log('user is signed out')
+    isAuth = false
   }
 }
+
+export function isAuthenticated() {
+  console.log('isAuth: ' , isAuth)
+  // return isAuth
+}
+
 
 /**
  *  Sign in the user upon button click.
