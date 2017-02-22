@@ -4,7 +4,10 @@ import '../css/style.css'
 import { Link } from 'react-router-dom'
 
 //google sheet api
-import { handleClientLoad } from './api/sheets'
+import { handleClientLoad,
+         handleAuthClick,
+         handleSignoutClick,
+         isSignedIn } from './api/sheets'
 
 //material-ui components
 import { RaisedButton } from 'material-ui/';
@@ -34,9 +37,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    window.gapi.load(
-      'client:auth2', 
-      () => checkAuth(true, this._handleAuth) )
+    // window.gapi.load(
+    //   'client:auth2', 
+    //   () => checkAuth(true, this._handleAuth) )
+
+    handleClientLoad()
+    // console.log('signed in', isSignedIn())
   }
 
   _authenticate(e) {

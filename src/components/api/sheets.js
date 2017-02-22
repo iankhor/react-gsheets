@@ -1,15 +1,15 @@
 // Client ID and API key from the Developer Console
-const CLIENT_ID = '<YOUR_CLIENT_ID>';
+const CLIENT_ID = process.env.REACT_APP_API_CLIENTID
 
 // Array of API discovery doc URLs for APIs used by the quickstart
-const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
 
-// Authorization scopes required by the API; multiple scopes can be
+// Authorization scopes required by the API multiple scopes can be
 // included, separated by spaces.
-const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly"
 
-const authorizeButton = document.getElementById('authorize-button');
-const signoutButton = document.getElementById('signout-button');
+// const authorizeButton = document.getElementById('authorize-button')
+// const signoutButton = document.getElementById('signout-button')
 
 const sheetsAPI = window.gapi
 
@@ -35,9 +35,13 @@ export function initClient() {
 
     // Handle the initial sign-in state.
     updateSigninStatus(sheetsAPI.auth2.getAuthInstance().isSignedIn.get());
-    authorizeButton.onclick = handleAuthClick;
-    signoutButton.onclick = handleSignoutClick;
+    // authorizeButton.onclick = handleAuthClick;
+    // signoutButton.onclick = handleSignoutClick;
   });
+}
+
+export function isSignedIn() {
+  return sheetsAPI.auth2.getAuthInstance().isSignedIn.get()
 }
 
 /**
@@ -46,14 +50,14 @@ export function initClient() {
  */
 export function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
-    authorizeButton.style.display = 'none';
-    signoutButton.style.display = 'block';
+    // authorizeButton.style.display = 'none';
+    // signoutButton.style.display = 'block';
 
     // place holder for action
 
   } else {
-    authorizeButton.style.display = 'block';
-    signoutButton.style.display = 'none';
+    // authorizeButton.style.display = 'block';
+    // signoutButton.style.display = 'none';
   }
 }
 
