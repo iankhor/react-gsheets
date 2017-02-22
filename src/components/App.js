@@ -3,6 +3,9 @@ import logo from '../../assets/img/logo.svg'
 import '../css/style.css'
 import { Link } from 'react-router-dom'
 
+//google sheet api
+import { handleClientLoad } from './api/sheets'
+
 //material-ui components
 import { RaisedButton } from 'material-ui/';
 
@@ -64,19 +67,23 @@ class App extends Component {
     return(
         <div>
           <p>You have been authenticated with Google</p>
-          <p><RaisedButton label="Load sheet functions then get get data from sheet" primary={true} onClick={ this._loadData }/></p>
+          <p><RaisedButton label="Load sheet functions then get  data from sheet. ( See Console Log or JSON Debugger )" primary={true} onClick={ this._loadData }/></p>
           <p><RaisedButton label="Update single cell" secondary={true} onClick={ this._updateSingleCell }/></p>
+          <p><RaisedButton label="Print data to sheet" primary={true} onClick={ this._dummyAlert }/></p>
+          <p><RaisedButton label="Create charts" secondary={true} onClick={ this._dummyAlert }/></p>
           <p><RaisedButton label="Push to G-Slides" default={true} onClick={ this._pushGSlides } /></p>
         </div>
     )
   }
 
+  _dummyAlert = () => {
+    alert('dummy placeholder')
+  }
+
   _updateCell = (colLetter, rowNumber, value) => {
-  // _updateCell = () => {
     window.gapi.client.sheets.spreadsheets.values.update({
     spreadsheetId: process.env.REACT_APP_API_SPREADSHEETID,
     range: 'Sheet1!' + colLetter + rowNumber,
-    // range: 'Sheet1!A1',
     valueInputOption: 'USER_ENTERED',
     values: [ [value] ]
   })
@@ -101,15 +108,15 @@ class App extends Component {
   _fetchDataFromSheet = () => {
     return window.gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: process.env.REACT_APP_API_SPREADSHEETID,
-      range: 'D1:D4'
+      range: 'D2:D4'
     }).then((response) => {
       return response.result.values
     })
   }
 
   _updateSingleCell = () => {
-    const randomRow = Math.floor((Math.random() * 4) + 1)
-    this._updateCell('D', randomRow , 'RandomExample' + randomRow.toString() )
+    const randomRow = Math.floor(1+ (Math.random() * 4) + 1)
+    this._updateCell('D', randomRow , 'RandomExample' + Date.now().toString() )
   }
 
   _pushGSlides = () => {
@@ -122,7 +129,7 @@ class App extends Component {
         <div className="App">
           <div className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h2>React + Google Sheets API Test</h2>
+            <h2>Google Sheets + Charts + Slides API Test with React</h2>
           </div>
 
           <div className="border color-blue">
